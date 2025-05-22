@@ -1,0 +1,33 @@
+/* App.css */
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #e0f7fa, #e0f2f1);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #e0f7fa, #e0f2f1);
+}
+
+
+.ant-card {
+  border-radius: 12px !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.ant-card-head-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+}
+
+.ant-form-item-label > label {
+  font-weight: 500;
+  color: #333;
+}
