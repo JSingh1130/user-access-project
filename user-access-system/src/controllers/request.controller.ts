@@ -82,19 +82,12 @@ export const updateRequestStatus = async (req: Request, res: Response): Promise<
     res.status(500).json({ error: "Failed to update request", details: error });
   }
 };
-export const getOwnRequests = async (req: Request, res: Response): Promise<void> => {
+export const getOwnRequests = async (req: AuthenticatedRequest, res: Response) => {
   try {
-    const user = (req as any).user;
-
     const requests = await requestRepo.find({
-      where: {
-        user: {
-          id: user.id,
-        },
-      },
+      where: { user: { id: req.user?.id } },
       relations: ["software"],
     });
-
     res.status(200).json({ requests });
   } catch (err) {
     res.status(500).json({ error: "Failed to fetch requests" });
