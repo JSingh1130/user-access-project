@@ -1,12 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import {
-  Table,
-  Tag,
-  Typography,
-  Card,
-  message,
-} from "antd";
+import { Table, Typography, Tag, Card, message } from "antd";
 
 const { Title } = Typography;
 
@@ -15,16 +9,14 @@ const MyRequests = () => {
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token");
 
-  const fetchRequests = async () => {
+  const fetchMyRequests = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/api/requests", {
+      const res = await axios.get("http://localhost:5000/api/requests/me", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-
-      // Optional: filter only logged-in user's requests here (if not already handled in backend)
       setRequests(res.data.requests || []);
     } catch (err) {
       message.error("Failed to load your requests");
@@ -34,33 +26,24 @@ const MyRequests = () => {
   };
 
   useEffect(() => {
-    fetchRequests();
+    fetchMyRequests();
   }, []);
 
   const columns = [
-    {
-      title: "Software",
-      dataIndex: ["software", "name"],
-    },
-    {
-      title: "Access Type",
-      dataIndex: "accessType",
-    },
-    {
-      title: "Reason",
-      dataIndex: "reason",
-    },
+    { title: "Software", dataIndex: ["software", "name"] },
+    { title: "Access Type", dataIndex: "accessType" },
+    { title: "Reason", dataIndex: "reason" },
     {
       title: "Status",
       dataIndex: "status",
       render: (status: string) => (
         <Tag
           color={
-            status === "Pending"
-              ? "orange"
-              : status === "Approved"
+            status === "Approved"
               ? "green"
-              : "red"
+              : status === "Rejected"
+              ? "red"
+              : "orange"
           }
         >
           {status}
@@ -84,13 +67,13 @@ const MyRequests = () => {
       <Card
         style={{
           width: "100%",
-          maxWidth: 800,
+          maxWidth: 1000,
           borderRadius: 12,
           boxShadow: "0 6px 20px rgba(0,0,0,0.1)",
           background: "#fff",
         }}
       >
-        <Title level={3} style={{ textAlign: "center" }}>
+        <Title level={3} style={{ textAlign: "center", marginBottom: 30 }}>
           My Access Requests
         </Title>
         <Table
@@ -98,7 +81,7 @@ const MyRequests = () => {
           columns={columns}
           dataSource={requests}
           loading={loading}
-          pagination={{ pageSize: 5 }}
+          pagination={{ pageSize: 8 }}
         />
       </Card>
     </div>

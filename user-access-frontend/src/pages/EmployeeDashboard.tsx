@@ -64,6 +64,10 @@ const EmployeeDashboard = () => {
     navigate("/login");
   };
 
+  const handleViewRequests = () => {
+    navigate("/my-requests");
+  };
+
   useEffect(() => {
     fetchSoftware();
   }, []);
@@ -143,6 +147,15 @@ const EmployeeDashboard = () => {
             </Button>
           </Form.Item>
         </Form>
+
+        <Button
+          type="default"
+          onClick={handleViewRequests}
+          block
+          style={{ marginTop: 10 }}
+        >
+          See My Requests
+        </Button>
       </Card>
     </div>
   );
