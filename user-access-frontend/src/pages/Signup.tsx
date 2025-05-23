@@ -19,17 +19,19 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const onFinish = async (values: any) => {
-    setLoading(true);
-    try {
-      await axios.post("http://localhost:5000/api/auth/signup", values);
-      message.success("Signup successful");
-      navigate("/login");
-    } catch (err: any) {
-      message.error(err?.response?.data?.message || "Signup failed");
-    } finally {
-      setLoading(false);
-    }
-  };
+  setLoading(true);
+  try {
+    const res = await axios.post("/auth/signup", values);
+    message.success("Signup successful");
+    navigate("/login");
+  } catch (err: any) {
+    console.error("Signup error:", err);  // 👈 Add this line
+    message.error(err?.response?.data?.message || "Signup failed");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div
