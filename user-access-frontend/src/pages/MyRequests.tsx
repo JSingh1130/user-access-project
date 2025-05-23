@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../api/axios";
+
 import { Table, Typography, Tag, Card, message } from "antd";
 
 const { Title } = Typography;

@@ -12,7 +12,8 @@ import {
   Row,
   Col,
 } from "antd";
-import axios from "axios";
+import axios from "../api/axios";
+
 
 const { Title } = Typography;
 

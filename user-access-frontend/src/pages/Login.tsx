@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
+import axios from "../api/axios";
+
 import {
   Button,
   Form,
