@@ -10,6 +10,7 @@ import {
   Card,
   Row,
   Col,
+  Empty,
 } from "antd";
 import axios from "../api/axios";
 
@@ -29,16 +30,7 @@ const EmployeeDashboard = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      const data = res.data || [];
-      if (data.length === 0) {
-        setSoftwareList([
-          { id: 1, name: "Photoshop" },
-          { id: 2, name: "Visual Studio Code" },
-          { id: 3, name: "Slack" },
-        ]);
-      } else {
-        setSoftwareList(data);
-      }
+      setSoftwareList(res.data || []);
     } catch (err) {
       message.error("Failed to load software list");
     }
@@ -106,47 +98,51 @@ const EmployeeDashboard = () => {
           </Col>
         </Row>
 
-        <Form layout="vertical" onFinish={onFinish} form={form}>
-          <Form.Item
-            name="softwareId"
-            label="Select Software"
-            rules={[{ required: true, message: "Please select a software" }]}
-          >
-            <Select placeholder="Select software" size="large">
-              {softwareList.map((soft: any) => (
-                <Select.Option key={soft.id} value={soft.id}>
-                  {soft.name}
-                </Select.Option>
-              ))}
-            </Select>
-          </Form.Item>
+        {softwareList.length === 0 ? (
+          <Empty description="No software available" />
+        ) : (
+          <Form layout="vertical" onFinish={onFinish} form={form}>
+            <Form.Item
+              name="softwareId"
+              label="Select Software"
+              rules={[{ required: true, message: "Please select a software" }]}
+            >
+              <Select placeholder="Select software" size="large">
+                {softwareList.map((soft: any) => (
+                  <Select.Option key={soft.id} value={soft.id}>
+                    {soft.name}
+                  </Select.Option>
+                ))}
+              </Select>
+            </Form.Item>
 
-          <Form.Item
-            name="accessType"
-            label="Access Type"
-            rules={[{ required: true, message: "Please choose access type" }]}
-          >
-            <Select placeholder="Select access type" size="large">
-              <Select.Option value="Read">Read</Select.Option>
-              <Select.Option value="Write">Write</Select.Option>
-              <Select.Option value="Admin">Admin</Select.Option>
-            </Select>
-          </Form.Item>
+            <Form.Item
+              name="accessType"
+              label="Access Type"
+              rules={[{ required: true, message: "Please choose access type" }]}
+            >
+              <Select placeholder="Select access type" size="large">
+                <Select.Option value="Read">Read</Select.Option>
+                <Select.Option value="Write">Write</Select.Option>
+                <Select.Option value="Admin">Admin</Select.Option>
+              </Select>
+            </Form.Item>
 
-          <Form.Item
-            name="reason"
-            label="Reason"
-            rules={[{ required: true, message: "Please provide a reason" }]}
-          >
-            <Input.TextArea rows={4} placeholder="Why do you need access?" />
-          </Form.Item>
+            <Form.Item
+              name="reason"
+              label="Reason"
+              rules={[{ required: true, message: "Please provide a reason" }]}
+            >
+              <Input.TextArea rows={4} placeholder="Why do you need access?" />
+            </Form.Item>
 
-          <Form.Item>
-            <Button type="primary" htmlType="submit" block size="large">
-              Submit Request
-            </Button>
-          </Form.Item>
-        </Form>
+            <Form.Item>
+              <Button type="primary" htmlType="submit" block size="large">
+                Submit Request
+              </Button>
+            </Form.Item>
+          </Form>
+        )}
 
         <Button
           type="default"
