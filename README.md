@@ -208,3 +208,4 @@ VITE_API_BASE_URL=https://user-access-backend.onrender.com/api
 ## 📧 Contact
 
 Created by: **Jatinjot Singh**
+Email : **jatinjot28@gmail.com**
