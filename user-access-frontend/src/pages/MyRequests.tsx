@@ -1,7 +1,5 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "../api/axios";
-
 import { Table, Typography, Tag, Card, message } from "antd";
 
 const { Title } = Typography;
@@ -14,7 +12,7 @@ const MyRequests = () => {
   const fetchMyRequests = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/api/requests/me", {
+      const res = await axios.get("/requests/me", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

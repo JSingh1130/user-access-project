@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Typography,
@@ -14,7 +13,6 @@ import {
 } from "antd";
 import axios from "../api/axios";
 
-
 const { Title } = Typography;
 
 const EmployeeDashboard = () => {
@@ -26,7 +24,7 @@ const EmployeeDashboard = () => {
 
   const fetchSoftware = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/software", {
+      const res = await axios.get("/software", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -48,7 +46,7 @@ const EmployeeDashboard = () => {
 
   const onFinish = async (values: any) => {
     try {
-      await axios.post("http://localhost:5000/api/requests", values, {
+      await axios.post("/requests", values, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

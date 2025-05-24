@@ -1,8 +1,6 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
-
 import {
   Table,
   Button,
@@ -26,7 +24,7 @@ const ManagerDashboard = () => {
   const fetchRequests = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/api/requests", {
+      const res = await axios.get("/requests", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -42,7 +40,7 @@ const ManagerDashboard = () => {
   const updateStatus = async (id: number, status: "Approved" | "Rejected") => {
     try {
       await axios.patch(
-        `http://localhost:5000/api/requests/${id}`,
+        `/requests/${id}`,
         { status },
         {
           headers: {
@@ -153,7 +151,6 @@ const ManagerDashboard = () => {
             <Button type="primary" danger onClick={handleLogout}>
               Logout
             </Button>
-
           </Col>
         </Row>
 

@@ -19,30 +19,31 @@ const Login = () => {
   const navigate = useNavigate();
 
   const onFinish = async (values: any) => {
-    setLoading(true);
-    try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", values);
-      const { token, role } = res.data;
+  setLoading(true);
+  try {
+    const res = await axios.post("/auth/login", values);
+    const { token, role } = res.data;
 
-      localStorage.setItem("token", token);
-      localStorage.setItem("role", role);
+    localStorage.setItem("token", token);
+    localStorage.setItem("role", role);
 
-      message.success("Login successful");
+    message.success("Login successful");
 
-      if (role === "Admin") {
-       navigate("/admin-dashboard");
-       } else if (role === "Manager") {
+    if (role === "Admin") {
+      navigate("/admin-dashboard");
+    } else if (role === "Manager") {
       navigate("/manager");
-      } else {
-       navigate("/employee"); // Employee dashboard
+    } else {
+      navigate("/employee");
     }
+  } catch (err: any) {
+    console.error("Login error:", err); // helpful for debugging
+    message.error(err?.response?.data?.message || "Login failed");
+  } finally {
+    setLoading(false);
+  }
+};
 
-    } catch (err: any) {
-      message.error(err?.response?.data?.message || "Login failed");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div

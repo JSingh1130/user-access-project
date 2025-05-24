@@ -1,7 +1,6 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
-
 import {
   Typography,
   Form,
@@ -14,7 +13,6 @@ import {
   Row,
   Col,
 } from "antd";
-import { useNavigate } from "react-router-dom";
 
 const { Title } = Typography;
 
@@ -23,13 +21,12 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
-
   const [form] = Form.useForm();
 
   const fetchSoftware = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/api/software", {
+      const res = await axios.get("/software", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSoftwareList(res.data || []);
@@ -49,7 +46,7 @@ const AdminDashboard = () => {
           .map((level: string) => level.trim()),
       };
 
-      await axios.post("http://localhost:5000/api/software", payload, {
+      await axios.post("/software", payload, {
         headers: { Authorization: `Bearer ${token}` },
       });
       message.success("Software created");
