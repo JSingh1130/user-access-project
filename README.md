@@ -208,10 +208,3 @@ VITE_API_BASE_URL=https://user-access-backend.onrender.com/api
 ## 📧 Contact
 
 Created by: **Jatinjot Singh**
-For: Final Assignment Submission (User Access Management System)
-
-```
-
----
-
-```
