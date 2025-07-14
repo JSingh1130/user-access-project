@@ -11,7 +11,11 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors()); // ✅ Enable CORS for all origins (during development)
+app.use(cors({
+  origin: "https://user-access-project.vercel.app", // 👈 Your frontend domain
+  credentials: true // optional, if you plan to use cookies or sessions
+}));
+
 
 app.use(express.json());
 
