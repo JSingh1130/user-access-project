@@ -21,7 +21,7 @@ const Signup = () => {
   const onFinish = async (values: any) => {
   setLoading(true);
   try {
-    const res = await axios.post("/auth/signup", values);
+    const res = await axios.post("/api/auth/signup", values);
     message.success("Signup successful");
     navigate("/login");
   } catch (err: any) {

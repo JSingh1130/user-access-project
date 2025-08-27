@@ -20,7 +20,7 @@ const Login = () => {
   const onFinish = async (values: any) => {
     setLoading(true);
     try {
-      const res = await axios.post("/auth/login", values);
+      const res = await axios.post("/api/auth/login", values);
       const { token, role } = res.data;
 
       localStorage.setItem("token", token);
