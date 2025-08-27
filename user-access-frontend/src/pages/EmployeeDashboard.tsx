@@ -24,7 +24,7 @@ const EmployeeDashboard = () => {
 
   const fetchSoftware = async () => {
     try {
-      const res = await axios.get("/software", {
+      const res = await axios.get("/api/software", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -37,7 +37,7 @@ const EmployeeDashboard = () => {
 
   const onFinish = async (values: any) => {
     try {
-      await axios.post("/requests", values, {
+      await axios.post("/api/requests", values, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

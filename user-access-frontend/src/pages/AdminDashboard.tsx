@@ -26,7 +26,7 @@ const AdminDashboard = () => {
   const fetchSoftware = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("/software", {
+      const res = await axios.get("/api/software", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSoftwareList(res.data || []);
@@ -46,7 +46,7 @@ const AdminDashboard = () => {
           .map((level: string) => level.trim()),
       };
 
-      await axios.post("/software", payload, {
+      await axios.post("/api/software", payload, {
         headers: { Authorization: `Bearer ${token}` },
       });
       message.success("Software created");

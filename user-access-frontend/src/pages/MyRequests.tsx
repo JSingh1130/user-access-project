@@ -12,7 +12,7 @@ const MyRequests = () => {
   const fetchMyRequests = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("/requests/me", {
+      const res = await axios.get("/api/requests/me", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

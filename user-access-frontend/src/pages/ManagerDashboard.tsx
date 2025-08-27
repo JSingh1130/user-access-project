@@ -24,7 +24,7 @@ const ManagerDashboard = () => {
   const fetchRequests = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("/requests", {
+      const res = await axios.get("/api/requests", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -40,7 +40,7 @@ const ManagerDashboard = () => {
   const updateStatus = async (id: number, status: "Approved" | "Rejected") => {
     try {
       await axios.patch(
-        `/requests/${id}`,
+        `/api/requests/${id}`,
         { status },
         {
           headers: {
